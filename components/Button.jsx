@@ -24,7 +24,7 @@ export default function Button ({theme, label, onPress}) {
 
 	return (
 		<View style={styles.buttonContainer}>
-			<Pressable style={styles.button} onPress={() => alert("HOW DARE YOU")}>
+			<Pressable style={styles.button} onPress={onPress}>
 				<Text style={styles.buttonLabel}>{label}</Text>
 			</Pressable>
 		</View>

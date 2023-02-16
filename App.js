@@ -17,9 +17,9 @@ const ErrorFallback = (props) => (
 
 export default function App () {
   const [selectedImage, setSelectedImage] = useState(null)
+  const [showAppOptions, setShowAppOptions] = useState(false)
 
   const pickImageAsync = async () => {
-    console.log("guess who arrived");
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
       quality: 1
@@ -27,10 +27,12 @@ export default function App () {
 
     if(!result.canceled) {
       setSelectedImage(result.assets[0].uri)
+      setShowAppOptions(true)
     } else {
       alert("you did not select an image")
     }
   }
+
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -40,10 +42,14 @@ export default function App () {
             selectedImage={selectedImage} />
         </View>
 
-        <View>
-          <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
-          <Button label="Use this photo" />
-        </View>
+        {showAppOptions ? (
+          <View />
+        ) : (
+          <View style={styles.footerContainer}>
+            <Button theme="primary" label="Choose a photo" onPress={pickImageAsync} />
+            <Button label="Use this photo" onPress={() => setShowAppOptions(true)} />
+          </View>
+        )}
         <StatusBar style="auto" />
       </View>
     </ErrorBoundary>
