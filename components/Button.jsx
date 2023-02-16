@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		borderRadius: 10,
-		outline: 'red',
 		width: '100%',
 		height: '100%',
 		alignItems: 'center',
