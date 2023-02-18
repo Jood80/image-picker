@@ -9,6 +9,7 @@ import ImageViewer from './components/ImageViewer';
 import IconButton from './components/IconButton';
 import CircleButton from './components/CircleButton';
 import EmojiPicker from './components/EmojiPicker';
+import EmojiList from './components/EmojiList';
 const PlaceholderImage = require('./assets/images/background-image.png');
 
 const ErrorFallback = (props) => (
@@ -22,6 +23,7 @@ export default function App () {
   const [selectedImage, setSelectedImage] = useState(null)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [showAppOptions, setShowAppOptions] = useState(false)
+  const [pickedEmoji, setPickedEmoji] = useState(null)
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -76,7 +78,7 @@ export default function App () {
           </View>
         )}
         <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
-
+          <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
         </EmojiPicker>
         <StatusBar style="auto" />
       </View>
