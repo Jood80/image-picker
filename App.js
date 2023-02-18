@@ -3,6 +3,7 @@ import {StyleSheet, View, Text} from 'react-native';
 import {StatusBar} from 'expo-status-bar';
 import * as ImagePicker from 'expo-image-picker';
 import ErrorBoundary from 'react-native-error-boundary'
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import Button from './components/Button';
 import ImageViewer from './components/ImageViewer';
@@ -59,6 +60,7 @@ export default function App () {
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <GestureHandlerRootView>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
           <ImageViewer placeholderImgSrc={PlaceholderImage}
@@ -84,7 +86,8 @@ export default function App () {
           <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
         </EmojiPicker>
         <StatusBar style="auto" />
-      </View>
+        </View>
+      </GestureHandlerRootView>
     </ErrorBoundary>
   );
 }
