@@ -4,7 +4,8 @@ import {
   Image,
   FlatList,
   SafeAreaView,
-  Platform,
+	Platform,
+	StyleSheet
 } from "react-native";
 
 export default function EmojiList({ onSelect, onCloseModal }) {
@@ -21,22 +22,39 @@ export default function EmojiList({ onSelect, onCloseModal }) {
   return (
     <SafeAreaView>
       <FlatList
-        data={emoji}
-        horizontal
-        showsHorizontalScrollIndicator={Platform.OS === "web" ? true : false}
-        renderItem={(item, index) => {
-          return (
-            <Pressable
-              onPress={() => {
-                onSelect(item);
-                onCloseModal();
-              }}
-            >
-              <Image source={emoji} key={index} />
-            </Pressable>
-          );
-        }}
-      />
+      data={emoji}
+      horizontal
+      showsHorizontalScrollIndicator={Platform.OS === "web" ? true : false}
+      contentContainerStyle={styles.listContainer}
+      renderItem={({ item, index }) => {
+        return (
+          <Pressable
+            onPress={() => {
+              onSelect(item);
+              onCloseModal();
+            }}>
+            <Image source={item} key={index} style={styles.image} />
+          </Pressable>
+        );
+      }}
+    />
     </SafeAreaView>
   );
 }
+
+
+const styles = StyleSheet.create({
+	listContainer: {
+		borderTopRightRadius: 10,
+		borderTopLeftRadius: 10,
+		paddingHorizontal: 20,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+	},
+	image: {
+		width: 100,
+		height: 100,
+		marginRight: 20
+	}
+})
