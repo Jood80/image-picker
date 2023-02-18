@@ -5,13 +5,8 @@ import * as ImagePicker from 'expo-image-picker';
 import ErrorBoundary from 'react-native-error-boundary'
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
-import Button from './components/Button';
-import ImageViewer from './components/ImageViewer';
-import IconButton from './components/IconButton';
-import CircleButton from './components/CircleButton';
-import EmojiPicker from './components/EmojiPicker';
-import EmojiList from './components/EmojiList';
-import EmojiSticker from './components/EmojiSticker';
+import { Button, ImageViewer, IconButton, CircleButton, EmojiPicker, EmojiList, EmojiSticker } from './components'
+
 
 const PlaceholderImage = require('./assets/images/background-image.png');
 
