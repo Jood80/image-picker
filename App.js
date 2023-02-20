@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import * as ImagePicker from 'expo-image-picker';
 import ErrorBoundary from 'react-native-error-boundary';
@@ -40,7 +40,7 @@ export default function App() {
       setSelectedImage(result.assets[0].uri);
       setShowAppOptions(true);
     } else {
-      alert('you did not select an image');
+      console.log('you did not select an image');
     }
   };
 
@@ -62,7 +62,7 @@ export default function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <GestureHandlerRootView style={styles.container}>
-        <View style={styles.container}>
+        <SafeAreaView style={styles.safeArea}>
           <View style={styles.imageContainer}>
             <ImageViewer
               placeholderImgSrc={PlaceholderImage}
@@ -102,13 +102,16 @@ export default function App() {
             <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
           </EmojiPicker>
           <StatusBar style="auto" />
-        </View>
+        </SafeAreaView>
       </GestureHandlerRootView>
     </ErrorBoundary>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 2,
+  },
   container: {
     flex: 1,
     backgroundColor: '#25292e',
