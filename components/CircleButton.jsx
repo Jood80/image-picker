@@ -13,10 +13,19 @@ export default function CircleButton({ onPress }) {
 
 const styles = StyleSheet.create({
   circleButtonContainer: {
-    backgroundColor: 'white',
+    width: 84,
+    height: 84,
+    marginHorizontal: 60,
+    borderWidth: 4,
+    borderColor: '#ffd33d',
+    borderRadius: 42,
+    padding: 3,
   },
-
   circleButton: {
-    backgroundColor: 'cyan',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 42,
+    backgroundColor: '#fff',
   },
 });
