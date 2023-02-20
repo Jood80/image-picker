@@ -102,58 +102,53 @@ export default function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <GestureHandlerRootView style={styles.container}>
-        <SafeAreaView style={styles.safeArea}>
-          <View style={styles.imageContainer}>
-            <View ref={imageRef} collapsable={false}>
-              <ImageViewer
-                placeholderImgSrc={PlaceholderImage}
-                selectedImage={selectedImage}
+        <View style={styles.imageContainer}>
+          <View ref={imageRef} collapsable={false}>
+            <ImageViewer
+              placeholderImgSrc={PlaceholderImage}
+              selectedImage={selectedImage}
+            />
+            {pickedEmoji && (
+              <EmojiSticker ImageSize={40} stickerSrc={pickedEmoji} />
+            )}
+          </View>
+        </View>
+
+        {showAppOptions ? (
+          <View style={styles.optionsContainer}>
+            <View style={styles.optionsRow}>
+              <IconButton icon="refresh" label="Reset" onPress={onReset} />
+              <CircleButton onPress={onAddSticker} />
+              <IconButton
+                icon="save-alt"
+                label="Save"
+                onPress={onSaveImageAsync}
               />
-              {pickedEmoji && (
-                <EmojiSticker ImageSize={40} stickerSrc={pickedEmoji} />
-              )}
             </View>
           </View>
-
-          {showAppOptions ? (
-            <View style={styles.optionsContainer}>
-              <View style={styles.optionsRow}>
-                <IconButton icon="refresh" label="Reset" onPress={onReset} />
-                <CircleButton onPress={onAddSticker} />
-                <IconButton
-                  icon="save-alt"
-                  label="Save"
-                  onPress={onSaveImageAsync}
-                />
-              </View>
-            </View>
-          ) : (
-            <View style={styles.footerContainer}>
-              <Button
-                theme="primary"
-                label="Choose a photo"
-                onPress={pickImageAsync}
-              />
-              <Button
-                label="Use this photo"
-                onPress={() => setShowAppOptions(true)}
-              />
-            </View>
-          )}
-          <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
-            <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
-          </EmojiPicker>
-          <StatusBar style="auto" />
-        </SafeAreaView>
+        ) : (
+          <View style={styles.footerContainer}>
+            <Button
+              theme="primary"
+              label="Choose a photo"
+              onPress={pickImageAsync}
+            />
+            <Button
+              label="Use this photo"
+              onPress={() => setShowAppOptions(true)}
+            />
+          </View>
+        )}
+        <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+          <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
+        </EmojiPicker>
+        <StatusBar style="dark" />
       </GestureHandlerRootView>
     </ErrorBoundary>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 2,
-  },
   container: {
     flex: 1,
     backgroundColor: '#25292e',
