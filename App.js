@@ -2,7 +2,6 @@ import { StyleSheet, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ErrorBoundary from 'react-native-error-boundary';
-import HomeScreen from './screens/Home';
 
 const ErrorFallback = (props) => {
   console.log(props);
@@ -21,7 +20,10 @@ export default function App() {
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
+          <Stack.Screen
+            name="Home"
+            getComponent={() => require('./screens/Home').default}
+          ></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </ErrorBoundary>
