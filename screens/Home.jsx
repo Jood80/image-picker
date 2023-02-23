@@ -19,7 +19,7 @@ import {
 
 const PlaceholderImage = require('../assets/images/background-image.png');
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [status, requestPermission] = MediaLibrary.usePermissions();
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -126,6 +126,10 @@ export default function HomeScreen() {
           <Button
             label="Use this photo"
             onPress={() => setShowAppOptions(true)}
+          />
+          <Button
+            label="About us"
+            onPress={() => navigation.navigate('About')}
           />
         </View>
       )}

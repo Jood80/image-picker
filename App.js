@@ -2,9 +2,10 @@ import { StyleSheet, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ErrorBoundary from 'react-native-error-boundary';
+import About from './screens/About';
+import Details from './screens/Details';
 
 const ErrorFallback = (props) => {
-  console.log(props);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Something happened!</Text>
@@ -19,11 +20,28 @@ export default function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#f4511e',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        >
           <Stack.Screen
             name="Home"
             getComponent={() => require('./screens/Home').default}
-          ></Stack.Screen>
+          />
+          <Stack.Screen
+            name="About"
+            component={About}
+            options={{ title: 'About' }}
+          />
+          <Stack.Screen name="Details" component={Details} />
         </Stack.Navigator>
       </NavigationContainer>
     </ErrorBoundary>
